@@ -277,11 +277,11 @@ void autonomous() {
 	if (right){
 		
 
-       move(50, 700); //forward and backwards
+        move(50, 700); //forward and backwards
 		pros::delay(400);
 		turn(-1,50,150);//turn to blocks
 		pros::delay(400);
-		intake(80,80,0,0);//intake block
+		intake(100,100,0,0);//intake block
 		move(40,900);
 		pros::delay(700);
 		intake(0,0,0,0);// stop intake
@@ -349,7 +349,7 @@ void opcontrol() {
 		//dir and turn have swapped
 		int dir = -master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);    // Gets amount forward/backward from left joystick
 		int turn = -master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);  // Gets the turn left/right from right joystick
-		left_mg.move(0.5*dir + turn);                      // Sets left motor voltage
+		left_mg.move(0.48*dir + turn);                      // Sets left motor voltage
 		right_mg.move(0.5*dir - turn); 
 	                                                             // Sets right motor voltage
 		pros::delay(20);                               // Run for 20 ms then update
@@ -392,11 +392,16 @@ void opcontrol() {
 		    pros::delay(500);
 		
         }
+       
 		else{
 			intake(0,0,0,0);	
 		}
 }
 }
+
+	
+	
+
 
 	
 	
