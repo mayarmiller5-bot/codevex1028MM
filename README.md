@@ -277,38 +277,146 @@ void autonomous() {
 	if (right){
 		
 
-        move(50, 700); //forward and backwards
-		pros::delay(400);
-		turn(-1,50,150);//turn to blocks
-		pros::delay(400);
-		intake(100,100,0,0);//intake block
-		move(40,900);
-		pros::delay(700);
-		intake(0,0,0,0);// stop intake
-		pros::delay(700);
-		move(-45,400);//move back
-		turn(1,50,382);
-		pros::delay(100);
-		move(40,800);//move toward goal
-		pros::delay(200);
-		intake(-95,-95,-95,-95);//outtake
-		pros::delay(200);
-		intake(80,80,0,0);//intake block for clogging
-		pros::delay(200);
-		intake(-95,-95,-95,-95);//outtake
-		pros::delay(2500);
-		intake(0,0,0, 0);//stop intake
-		move(-60,1200);//moves back long move
-		piston.set_value(1);//pistion down
-		turn(-1,40,1300);//turn to matchloader
-		pros::delay(100);
-		move(60,400);//moving to loading zone
-		pros::delay(100);
-		move(60,400);
-		intake(100,100,100,100);//intake block
-		pros::delay(500);
-		move(40,50);//small move
-		intake(0,0,0, 0);
+        
+		chassis.moveToPoint(2, 0, 1000); 
+    pros::delay(100);
+
+    // Turn to face blocks (example heading -90°)
+    chassis.turnToHeading(-90, 1500); 
+    pros::delay(400);
+
+    // Start intake
+    intake(80, 80, 0, 0);
+
+    // Move toward block (~30 inches forward)
+    chassis.moveToPoint(20, -30, 2000); 
+    pros::delay(700);
+
+    // Stop intake
+    intake(0, 0, 0, 0);
+    pros::delay(700);
+
+    // Move back slightly (~15 inches)
+    chassis.moveToPoint(20, -15, 1000); 
+
+    // Turn toward goal (example heading 0°)
+    chassis.turnToHeading(0, 2000);
+    pros::delay(100);
+
+    // Move toward goal (~25 inches forward)
+    chassis.moveToPoint(45, 0, 1500); 
+    pros::delay(200);
+
+    // Outtake for scoring
+    intake(-95, -95, -95, -95); 
+    pros::delay(200);
+
+    // Intake again briefly to fix clog
+    intake(80, 80, 0, 0); 
+    pros::delay(200);
+
+    // Outtake again
+    intake(-95, -95, -95, -95); 
+    pros::delay(2500);
+
+    // Stop intake
+    intake(0, 0, 0, 0);
+
+    // Move back long distance (~40 inches)
+    chassis.moveToPoint(5, -40, 2500); 
+
+    // Lower piston
+    piston.set_value(1); 
+
+    // Turn toward match loader (~heading -90°)
+    chassis.turnToHeading(-90, 2000); 
+    pros::delay(100);
+
+    // Move to loading zone (~15 inches)
+    chassis.moveToPoint(-10, -55, 1500); 
+    pros::delay(100);
+
+    // Move slightly forward (~15 inches)
+    chassis.moveToPoint(5, -40, 1500); 
+
+    // Intake block
+    intake(100, 100, 100, 100); 
+    pros::delay(500);
+
+    // Small adjustment
+    chassis.moveToPoint(5, -35, 500); 
+    intake(0, 0, 0, 0);
+
+    // Move forward ~20 inches
+    chassis.moveToPoint(0, 1, 2000); 
+    pros::delay(400);
+
+    // Turn to face blocks (example heading -90°)
+    chassis.turnToHeading(-90, 1500); 
+    pros::delay(400);
+
+    // Start intake
+    intake(80, 80, 0, 0);
+
+    // Move toward block (~30 inches forward)
+    chassis.moveToPoint(20, -30, 2000); 
+    pros::delay(700);
+
+    // Stop intake
+    intake(0, 0, 0, 0);
+    pros::delay(700);
+
+    // Move back slightly (~15 inches)
+    chassis.moveToPoint(20, -15, 1000); 
+
+    // Turn toward goal (example heading 0°)
+    chassis.turnToHeading(0, 2000);
+    pros::delay(100);
+
+    // Move toward goal (~25 inches forward)
+    chassis.moveToPoint(45, 0, 1500); 
+    pros::delay(200);
+
+    // Outtake for scoring
+    intake(-95, -95, -95, -95); 
+    pros::delay(200);
+
+    // Intake again briefly to fix clog
+    intake(80, 80, 0, 0); 
+    pros::delay(200);
+
+    // Outtake again
+    intake(-95, -95, -95, -95); 
+    pros::delay(2500);
+
+    // Stop intake
+    intake(0, 0, 0, 0);
+
+    // Move back long distance (~40 inches)
+    chassis.moveToPoint(5, -40, 2500); 
+
+    // Lower piston
+    piston.set_value(1); 
+
+    // Turn toward match loader (~heading -90°)
+    chassis.turnToHeading(-90, 2000); 
+    pros::delay(100);
+
+    // Move to loading zone (~15 inches)
+    chassis.moveToPoint(-10, -55, 1500); 
+    pros::delay(100);
+
+    // Move slightly forward (~15 inches)
+    chassis.moveToPoint(5, -40, 1500); 
+
+    // Intake block
+    intake(100, 100, 100, 100); 
+    pros::delay(500);
+
+    // Small adjustment
+    chassis.moveToPoint(5, -35, 500); 
+    intake(0, 0, 0, 0);
+		
 	 
 	}
 	
