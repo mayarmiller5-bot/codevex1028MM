@@ -2,7 +2,7 @@
 //#include "api.h"
 #include "pros/misc.h"
 #include "pros/misc.hpp"
-#include "pros/motors.h"
+//#include "pros/motors.h"
 #include "pros/motors.hpp"
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "pros/rtos.hpp"
@@ -55,7 +55,7 @@ lemlib::Drivetrain drivetrain(&left_mg, // left motor group
                               &right_mg, // right motor group
                               11.5, // 10 inch track width
                               lemlib::Omniwheel::NEW_4, // using new 4" omnis
-                              360, // drivetrain rpm is 360
+                              600, // drivetrain rpm is 600
                               2 // horizontal drift is 2 (for now)
 );
 
@@ -275,153 +275,50 @@ void turn_new(int degree){
 void autonomous() { 
 	bool right = true;
 	if (right){
-		
 
+        move(60, 200); //forward and backwards
+		pros::delay(400);
+		turn(1,50,180);//turn to blocks
+		
+        pros::delay(400);
+		intake(110,110,0,0);//intake block
+		move(40,1000);
+		
+        pros::delay(1300);
+		intake(0,0,0,0);// stop intake
+		pros::delay(700);
+		
+        turn(1,50,650);//turn to blocks
+        move(60, 1000); //forward and backwards
+        turn(1,50,170);//turn to blocks
+         
+        move(-40, 650); //forward and backwards
+        intake(127,100,100,127);
+        pros::delay(1700);
+       
+       
+        move(40, 300); //forward and backwards
+        piston.set_value(1);//pistion down
+        move(40, 600); //forward 
+           
+        intake(127,100,0,0);      
+        move(50, 1000); //forward and backwards
+        pros::delay(800); 
+        move(50, 900); //forward and backwards
+
+        intake(0,0,0,0);// stop intake
+        move(-40, 1500); //forward and backwards
+        intake(127,110,110,110);
         
-		chassis.moveToPoint(2, 0, 1000); 
-    pros::delay(100);
-
-    // Turn to face blocks (example heading -90°)
-    chassis.turnToHeading(-90, 1500); 
-    pros::delay(400);
-
-    // Start intake
-    intake(80, 80, 0, 0);
-
-    // Move toward block (~30 inches forward)
-    chassis.moveToPoint(20, -30, 2000); 
-    pros::delay(700);
-
-    // Stop intake
-    intake(0, 0, 0, 0);
-    pros::delay(700);
-
-    // Move back slightly (~15 inches)
-    chassis.moveToPoint(20, -15, 1000); 
-
-    // Turn toward goal (example heading 0°)
-    chassis.turnToHeading(0, 2000);
-    pros::delay(100);
-
-    // Move toward goal (~25 inches forward)
-    chassis.moveToPoint(45, 0, 1500); 
-    pros::delay(200);
-
-    // Outtake for scoring
-    intake(-95, -95, -95, -95); 
-    pros::delay(200);
-
-    // Intake again briefly to fix clog
-    intake(80, 80, 0, 0); 
-    pros::delay(200);
-
-    // Outtake again
-    intake(-95, -95, -95, -95); 
-    pros::delay(2500);
-
-    // Stop intake
-    intake(0, 0, 0, 0);
-
-    // Move back long distance (~40 inches)
-    chassis.moveToPoint(5, -40, 2500); 
-
-    // Lower piston
-    piston.set_value(1); 
-
-    // Turn toward match loader (~heading -90°)
-    chassis.turnToHeading(-90, 2000); 
-    pros::delay(100);
-
-    // Move to loading zone (~15 inches)
-    chassis.moveToPoint(-10, -55, 1500); 
-    pros::delay(100);
-
-    // Move slightly forward (~15 inches)
-    chassis.moveToPoint(5, -40, 1500); 
-
-    // Intake block
-    intake(100, 100, 100, 100); 
-    pros::delay(500);
-
-    // Small adjustment
-    chassis.moveToPoint(5, -35, 500); 
-    intake(0, 0, 0, 0);
-
-    // Move forward ~20 inches
-    chassis.moveToPoint(0, 1, 2000); 
-    pros::delay(400);
-
-    // Turn to face blocks (example heading -90°)
-    chassis.turnToHeading(-90, 1500); 
-    pros::delay(400);
-
-    // Start intake
-    intake(80, 80, 0, 0);
-
-    // Move toward block (~30 inches forward)
-    chassis.moveToPoint(20, -30, 2000); 
-    pros::delay(700);
-
-    // Stop intake
-    intake(0, 0, 0, 0);
-    pros::delay(700);
-
-    // Move back slightly (~15 inches)
-    chassis.moveToPoint(20, -15, 1000); 
-
-    // Turn toward goal (example heading 0°)
-    chassis.turnToHeading(0, 2000);
-    pros::delay(100);
-
-    // Move toward goal (~25 inches forward)
-    chassis.moveToPoint(45, 0, 1500); 
-    pros::delay(200);
-
-    // Outtake for scoring
-    intake(-95, -95, -95, -95); 
-    pros::delay(200);
-
-    // Intake again briefly to fix clog
-    intake(80, 80, 0, 0); 
-    pros::delay(200);
-
-    // Outtake again
-    intake(-95, -95, -95, -95); 
-    pros::delay(2500);
-
-    // Stop intake
-    intake(0, 0, 0, 0);
-
-    // Move back long distance (~40 inches)
-    chassis.moveToPoint(5, -40, 2500); 
-
-    // Lower piston
-    piston.set_value(1); 
-
-    // Turn toward match loader (~heading -90°)
-    chassis.turnToHeading(-90, 2000); 
-    pros::delay(100);
-
-    // Move to loading zone (~15 inches)
-    chassis.moveToPoint(-10, -55, 1500); 
-    pros::delay(100);
-
-    // Move slightly forward (~15 inches)
-    chassis.moveToPoint(5, -40, 1500); 
-
-    // Intake block
-    intake(100, 100, 100, 100); 
-    pros::delay(500);
-
-    // Small adjustment
-    chassis.moveToPoint(5, -35, 500); 
-    intake(0, 0, 0, 0);
-		
-	 
-	}
+        pros::delay(4600);  
+        intake(0,0,0,0);// stop intake
 	
 		
-
+	
+		
+	
+		
+    }
 	}
 
 
@@ -458,7 +355,7 @@ void opcontrol() {
 		int dir = -master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);    // Gets amount forward/backward from left joystick
 		int turn = -master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);  // Gets the turn left/right from right joystick
 		left_mg.move(0.48*dir + turn);                      // Sets left motor voltage
-		right_mg.move(0.5*dir - turn); 
+		right_mg.move(0.50*dir - turn); 
 	                                                             // Sets right motor voltage
 		pros::delay(20);                               // Run for 20 ms then update
 		
@@ -506,10 +403,6 @@ void opcontrol() {
 		}
 }
 }
-
-	
-	
-
 
 	
 	
