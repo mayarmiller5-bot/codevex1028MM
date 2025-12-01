@@ -1,3 +1,4 @@
+
 #include "main.h"
 //#include "api.h"
 #include "pros/misc.h"
@@ -5,6 +6,7 @@
 //#include "pros/motors.h"
 #include "pros/motors.hpp"
 #include "lemlib/api.hpp" // IWYU pragma: keep
+#include "pros/rotation.hpp"
 #include "pros/rtos.hpp"
 #include "pros/adi.hpp"
 //#include <utility>
@@ -17,6 +19,7 @@ pros::Motor RightBack (17);
 pros::Motor LeftBack (11);
 pros::Motor LeftMiddle (18);
 pros::Motor LeftFront (4);
+
 
 
 
@@ -55,7 +58,7 @@ lemlib::Drivetrain drivetrain(&left_mg, // left motor group
                               &right_mg, // right motor group
                               11.5, // 10 inch track width
                               lemlib::Omniwheel::NEW_4, // using new 4" omnis
-                              600, // drivetrain rpm is 600
+                              360, // drivetrain rpm is 600
                               2 // horizontal drift is 2 (for now)
 );
 
@@ -276,28 +279,35 @@ void autonomous() {
 	bool right = true;
 	if (right){
 
-        move(60, 200); //forward and backwards
+       
+	
+     move(60, 200); //forward and backwards
 		pros::delay(400);
-		turn(1,50,180);//turn to blocks
+		turn(1,50,190);//turn to blocks
 		
         pros::delay(400);
 		intake(110,110,0,0);//intake block
 		move(40,1000);
 		
-        pros::delay(1300);
+        pros::delay(1100);
 		intake(0,0,0,0);// stop intake
 		pros::delay(700);
 		
         turn(1,50,650);//turn to blocks
-        move(60, 1000); //forward and backwards
-        turn(1,50,170);//turn to blocks
+        move(60, 900); //forward and backwards
+        turn(1,50,165);//turn to blocks
          
         move(-40, 650); //forward and backwards
         intake(127,100,100,127);
-        pros::delay(1700);
+        pros::delay(400);
        
+        intake(-127,-100,-100,-127);
+        pros::delay(300);
+        intake(127,100,100,127);
+        pros::delay(1500);
        
-        move(40, 300); //forward and backwards
+
+        move(40, 500); //forward and backwards
         piston.set_value(1);//pistion down
         move(40, 600); //forward 
            
@@ -307,43 +317,21 @@ void autonomous() {
         move(50, 900); //forward and backwards
 
         intake(0,0,0,0);// stop intake
-        move(-40, 1500); //forward and backwards
+        move(-40, 1600); //forward and backwards
         intake(127,110,110,110);
         
         pros::delay(4600);  
         intake(0,0,0,0);// stop intake
-	
-		
-	
-		
-	
 		
     }
 	}
 
 
-	
 
-
-
-
-/**
- * Runs the operator control code. This function will be started in its own task
- * with the default priority and stack size whenever the robot is enabled via
- * the Field Management System or the VEX Competition Switch in the operator
- * control mode.
- *
- * If no competition control is connected, this function will run immediately
- * following initialize().
- *
- * If the robot is disabled or communications is lost, the
- * operator control task will be stopped. Re-enabling the robot will restart the
- * task, not resume it from where it left off.
- */
 void opcontrol() {
 	
 	
-
+    
 
 	while (true) {
 		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
